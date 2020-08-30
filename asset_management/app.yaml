@@ -1,0 +1,23 @@
+runtime: python
+entrypoint: gunicorn -b :8000 PROJECT_DIRECTORY.wsgi
+env: flex
+
+env_variables:
+  SECRET_KEY: '6awws=74n0zno14251#sm=rhs=3-$(r%2&!aj3*$h^t^j#jd%!'
+  DEBUG: 'False'
+  DB_HOST: '/cloudsql/project-tracking-system-go:asia-south1:asset'
+  DB_PORT: '5431'
+  DB_NAME: 'asset_management'
+  DB_USER: 'postgres'
+  DB_PASSWORD: '12345'
+  STATIC_URL: 'https://storage.googleapis.com/asset-gcp/static/'
+
+handlers:
+  - url: /static
+  static_dir: static
+
+beta_settings:
+  cloud_sql_instances: project-tracking-system-go:asia-south1:asset
+
+runtime_config:
+  python_version: 3
